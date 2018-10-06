@@ -56,14 +56,24 @@ namespace Dmacro
 
             try
             {
-                // 사각 잘라내서 보여주기, PK 감지
-                Rectangle rects = new Rectangle(868, 388, 70, 90);
+                // 사각 잘라내서 보여주기, PK 감지 /* 이미지 서치 기능 동작 안해서 주석 처리
+                /*
+                Rectangle rects = new Rectangle(580, 290, 60, 60);
                 var cloned = new Bitmap(bmp).Clone(rects, bmp.PixelFormat);
                 pictureBox1.Image = cloned;
-
+                */
                 //  PK 감지 텔
                 if (checkBox4.Checked)
                 {
+                    if(bmp.GetPixel(4, 40).R > 60 && bmp.GetPixel(4, 40).G < 10 && bmp.GetPixel(4, 40).B < 10 &&
+                    bmp.GetPixel(4, 388).R > 60 && bmp.GetPixel(4, 388).G < 10 && bmp.GetPixel(4, 388).B < 10 &&
+                    bmp.GetPixel(630, 388).R > 60 && bmp.GetPixel(630, 388).G < 10 && bmp.GetPixel(630, 388).B < 10 &&
+                    bmp.GetPixel(630, 40).R > 60 && bmp.GetPixel(630, 40).G < 10 && bmp.GetPixel(630, 40).B < 10 )
+                    {
+                        playTel();
+                    }
+
+                    /* 이미지 서치 기능 동작 안해서 주석 처리
                     if (searchIMG(cloned, Resource.pk))
                     {
                         if (pkCnt==0)
@@ -73,7 +83,7 @@ namespace Dmacro
                         if (pkCnt == 3)
                             pkCnt = 0;
                         pkCnt++;
-                    }
+                    }*/
                 }
                 // hp20 귀환
                 if (checkBox5.Checked)
@@ -128,7 +138,7 @@ namespace Dmacro
         {
             await Task.Delay(2000);
             //InClick_y(907, 511);    // 귀환
-            InClick_y(844, 511);    // 텔
+            InClick_y(561, 352);    // 텔
             await Task.Delay(3000);
         }
 
@@ -141,7 +151,7 @@ namespace Dmacro
         }
         private async Task playGoHomeTask()
         {
-            InClick_y(907, 511);    // 귀환
+            InClick_y(605, 353);    // 귀환
             //InClick_y(844, 511);    // 텔
             await Task.Delay(1500);
         }
@@ -155,14 +165,14 @@ namespace Dmacro
         }
         private async Task getACheckTask()
         {
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(1500);
-            InClick_y(807, 176);    // 출첵
+            InClick_y(642, 398);    // 출첵
             await Task.Delay(3000);
 
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(2000);
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(1500);
         }
 
@@ -175,19 +185,19 @@ namespace Dmacro
         }
         private async Task getGCheckTask()
         {
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(1500);
-            InClick_y(697, 226);    // 혈맹
+            InClick_y(467, 163);    // 혈맹
             await Task.Delay(3000);
 
-            InClick_y(906, 160);    // 출첵
+            InClick_y(606, 121);    // 출첵
             await Task.Delay(3000);
 
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(2000);
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(2000);
-            InClick_y(924, 69);     // 메뉴
+            InClick_y(619, 55);     // 메뉴
             await Task.Delay(1500);
         }
 
@@ -200,16 +210,16 @@ namespace Dmacro
         }
         private async Task getPostTask()
         {
-            InClick_y(924, 69);
+            InClick_y(615, 55);     // 메뉴
             await Task.Delay(1500);
-            InClick_y(753, 282);
+            InClick_y(500, 200);    // 우편함
             await Task.Delay(1500);
-            InClick_y(840, 537);
+            InClick_y(564, 365);    // 받기
             await Task.Delay(1500);
 
-            InClick_y(924, 69);
+            InClick_y(615, 55);     // 메뉴
             await Task.Delay(1500);
-            InClick_y(924, 69);
+            InClick_y(615, 55);     // 메뉴
             await Task.Delay(1500);
         }
 
@@ -230,7 +240,7 @@ namespace Dmacro
                 //찾은 이미지의 유사도 및 위치 값을 받습니다. 
                 Cv2.MinMaxLoc(res, out minval, out maxval, out minloc, out maxloc);
                 Debug.WriteLine("찾은 이미지의 유사도 : " + maxval);
-
+                
                 if (maxval >= 0.8)
                 {
                     return true;
@@ -323,7 +333,7 @@ namespace Dmacro
                 pictureBox.Image = bmp;
 
                 // 특정 지점 RGB 컬러 저정
-                Color clr = bmp.GetPixel(97, 55);
+                Color clr = bmp.GetPixel(68, 49);
                 R = clr.R;
                 G = clr.G;
                 B = clr.B;
